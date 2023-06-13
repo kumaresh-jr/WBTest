@@ -1,7 +1,4 @@
-provider "azurerm" {
-  features {}
-}
-
+/* fddjk */ # eliminate to execute
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = "East US" # UPdated the location
