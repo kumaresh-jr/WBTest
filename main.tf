@@ -1,30 +1,31 @@
-
-
 resource "azurerm_resource_group" "example" {
-  count    = 2
-  name     = "rg${count.index}"
+  name     = "example-resources"
   location = "EastUS"
 }
 
-resource "azurerm_resource_group" "env" {
-  count    = length(var.resource_group_names)
-  name     = "rg-${var.resource_group_names[count.index]}"
-  location = "EastUS"
-}
+resource "azurerm_network_security_group" "example" {
+  name                = "acceptanceTestSecurityGroup1"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
 
-resource "azurerm_resource_group" "map" {
-  for_each = var.rgmap
-  name     = each.key
-  location = each.value
-}
+  dynamic "security_rule" {
+    for_each = var.nsg_rules
+    content{
+        name                       = security_rule.value["name"]
+        priority                   = security_rule.value["priority"]
+        direction                  = security_rule.value["direction"]
+        access                     = security_rule.value["access"]
+        protocol                   = security_rule.value["protocol"]
+        source_port_range          = security_rule.value["source_port_range"]
+        destination_port_range     = security_rule.value["destination_port_range"]
+        source_address_prefix      = security_rule.value["source_address_prefix"]
+        destination_address_prefix = security_rule.value["destination_address_prefix"]
+    }
+  }
 
-resource "azurerm_public_ip" "pip" {
-  name                = "pip${count.index}"
-  resource_group_name = azurerm_resource_group.example[0].name
-  location            = azurerm_resource_group.example[0].location
-  allocation_method   = "static"
-  count               = 5
+  tags = {
+    environment = "Production"
+  }
 }
-
 
 
