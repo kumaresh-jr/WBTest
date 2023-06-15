@@ -1,16 +1,23 @@
+provider "azurerm" {
+  features {}
+}
+variable "replication_type" {
+  description = "dev"
+}
 resource "azurerm_resource_group" "example" {
-  provider = azurerm.dev
-  name     = var.resource_group_name
-  location = var.resource_group_location
+  name     = "example-resources"
+  location = "West Europe"
 }
-resource "azurerm_resource_group" "test" {
-  provider = azurerm.test
-  #name     = "test-resource"
-  #location = "east us"
-  #name = var.resource_group_details[0]
-  #location = var.resource_group_details[1]
-  name = var.resource_group_details_map.name
-  location = var.resource_group_details_map.location
+resource "azurerm_storage_account" "example" {
+  name                     = "yourstorageacc"
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
+  account_tier             = "Standard"
+  account_replication_type = var.replication_type == "prod" ? "LRS" : "GRS"
 }
+output "replication_type" {
+  value = azurerm_storage_account.example.account_replication_type
+}
+
 
 
