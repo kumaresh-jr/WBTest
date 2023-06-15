@@ -2,11 +2,12 @@ provider "azurerm" {
   features {}
 }
 variable "replication_type" {
+  default = "dev"
   description = "dev"
 }
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
-  location = "West Europe"
+  location = "EastUS"
 }
 resource "azurerm_storage_account" "example" {
   name                     = "yourstorageacc"
