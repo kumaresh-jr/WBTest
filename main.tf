@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "example" {
   location = "EastUS"
 }
 
-rsource "azurerm_resource_group" "env" {
+resource "azurerm_resource_group" "env" {
   count = length(var.resource_group_names)
   name = "rg-${var.resource_group_names[count.index]}"
   location = "EastUS"
