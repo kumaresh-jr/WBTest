@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "example" {
   name     = "example-resources50"
-  location = "West Europe"
+  location = "EastUS"
 }
 resource "azurerm_public_ip" "pip" {
   name                = "pip${count.index}"
