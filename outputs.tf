@@ -1,3 +1,3 @@
 output "test"{
-    value = "testing output block"
+    value = "the replication type is ${}"
 }
