@@ -7,8 +7,8 @@ resource "azurerm_resource_group" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   allocation_method   = "Static"
-  count               = 5*/
-}
+  count               = 5
+}*/
 
 
 
