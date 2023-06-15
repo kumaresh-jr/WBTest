@@ -1,6 +1,4 @@
-provider "azurerm" {
-  features {}
-}
+
 variable "replication_type" {
   default = "dev"
   description = "dev"
