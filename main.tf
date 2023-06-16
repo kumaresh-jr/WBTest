@@ -2,7 +2,7 @@ data "azurerm_client_config" "current" {
 }
 resource "azurerm_resource_group" "example" {
   name     = "my-vault"
-  location = "West Europe"
+  location = "EastUS"
 }
 resource "azurerm_key_vault" "example" {
   name                        = "myvaulthere1234"
