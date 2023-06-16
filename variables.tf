@@ -1,1 +1,3 @@
-
+variable "test"{
+    default = "hello"
+}
